@@ -58,15 +58,19 @@ export default class CreateTodo extends React.Component {
 
   	render() {
 		return (
-	  	<form onSubmit={this.handleCreate.bind(this)}>
-			<input 
-				type="text" 
-				placeholder="Enter Item" 
-				value={this.state.inputv} 
-				onChange={this.handleChange}
-				className="new-todo"/>
-				{this.renderError()}
-	  	</form>  
+	  	<div>
+	  		<header className="header">
+	  		<form onSubmit={this.handleCreate.bind(this)}>
+				<input 
+					type="text" 
+					placeholder="Enter Item" 
+					value={this.state.inputv} 
+					onChange={this.handleChange}
+					className="new-todo"/>
+					{this.renderError()}
+		  	</form>  
+	  		</header>
+	  	</div>
 		);
   	}
 }

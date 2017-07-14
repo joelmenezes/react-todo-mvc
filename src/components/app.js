@@ -10,6 +10,7 @@ const completeTodos = [];
 const viewType = 'all';
 const toggleStatus = false;
 const countActive = 0;
+const countComplete = 0;
 
 export default class App extends React.Component {
 	constructor(props){
@@ -21,7 +22,8 @@ export default class App extends React.Component {
 			completeTodos,
 			viewType, 
 			toggleStatus, 
-			countActive
+			countActive,
+            countComplete
 		}; 
 	}
 
@@ -36,7 +38,8 @@ export default class App extends React.Component {
 		this.setState({ 
 			viewType:'all',
         	toggleStatus : false,
-        	countActive: this.countActive()
+        	countActive: this.countActive(),
+            countCompleted: this.countCompleted()
         });
 	}
 
@@ -50,7 +53,8 @@ export default class App extends React.Component {
         this.setState({ 
         	todos: this.state.todos,
         	toggleStatus : false,
-        	countActive: this.countActive()
+        	countActive: this.countActive(),
+            countCompleted: this.countCompleted()
         });
     }
 
@@ -64,7 +68,8 @@ export default class App extends React.Component {
     	this.setState({ 
     		todos: this.state.todos,
     		toggleStatus : false,
-    		countActive: this.countActive() 
+    		countActive: this.countActive(),
+            countCompleted: this.countCompleted() 
     	});
     }
 
@@ -77,7 +82,8 @@ export default class App extends React.Component {
     	this.setState({ 
     		todos: this.state.todos,
     		toggleStatus : false,
-    		countActive: this.countActive() 
+    		countActive: this.countActive(),
+            countCompleted: this.countCompleted() 
     	});
     }
 
@@ -100,7 +106,7 @@ export default class App extends React.Component {
 		the state.
     */
     completedTasks() {
-    	const completedTasks = this.state.todos.filter(this.state.todos, todo=> todo.isCompleted === true);
+    	const completedTasks = this.state.todos.filter(todo=> todo.isCompleted === true);
     	this.setState({
     		completeTodos: completedTasks,
     		viewType: 'completed'
@@ -123,9 +129,15 @@ export default class App extends React.Component {
 		iterates through the 'todos' array and removes completed tasks.
     */
     clearCompleted() {
-    	_.remove(this.state.todos, todo=> todo.isCompleted === true);
-    	this.setState({
+        var todoNow = this.state.todos;
+        for (var j = 0; j < todoNow.length; j++) {
+            if (todoNow[j].isCompleted === true) {
+                todoNow.splice(j, 1);
+            }
+        }
+        this.setState({
     		viewType: 'all',
+            todos: todoNow,
     		countActive: this.countActive()
     	});
     }
@@ -165,6 +177,11 @@ export default class App extends React.Component {
     	return _.size(activeTasks);
     }
 
+    countCompleted() {
+        const countCompleted = this.state.todos.length - this.countActive();
+        return countCompleted;
+    }
+
     /*
 		This method decides which array of todos is to be passed to TodosList. It does so by
 		switching 'this.state.viewType' and returning the relevant array.
@@ -182,26 +199,38 @@ export default class App extends React.Component {
     	}
     }
 
+    renderViews() {
+        if (this.countCompleted() > 0 || this.countActive() > 0){
+            return(
+                <Views 
+                    activeTasks={this.activeTasks.bind(this)}
+                    completedTasks={this.completedTasks.bind(this)}
+                    allTasks={this.allTasks.bind(this)}
+                    clearCompleted={this.clearCompleted.bind(this)}
+                    toggleAll={this.toggleAll.bind(this)}
+                    countActive={this.state.countActive}
+                    countCompleted={this.state.countCompleted}
+                />
+            );
+        }
+    }
+
     render() {
 		return (
-			<div className="container">
-				<h1 className="header"><i>React To Do List:</i></h1>
+			<section className="todoapp">
+                <header>
+				<h1>todos</h1>
 				<CreateTodo todos={this.state.todos} createTask={this.createTask.bind(this)}/>
-				<TodosList 
+				</header>
+                <TodosList 
 					todos={this.setTodos()} 
 					toggleTask={this.toggleTask.bind(this)}
 					saveTask={this.saveTask.bind(this)}
 					deleteTask={this.deleteTask.bind(this)}
 				/>
-				<Views 
-					activeTasks={this.activeTasks.bind(this)}
-					completedTasks={this.completedTasks.bind(this)}
-					allTasks={this.allTasks.bind(this)}
-					clearCompleted={this.clearCompleted.bind(this)}
-					toggleAll={this.toggleAll.bind(this)}
-					countActive={this.state.countActive}
-				/>
-			</div>
+                {this.renderViews()}
+				
+			</section>
 		);
 	}
 }

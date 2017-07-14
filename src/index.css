@@ -518,3 +518,61 @@ html .clear-completed:active {
     left: 8px;
   }
 }
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 2px;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;  
+}
+
+.btn:hover,
+.btn:focus,
+.btn.focus {
+  color: #333;
+  text-decoration: none;
+}
+
+.btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+.btn-default:active,
+.btn-default:focus,
+.open > .dropdown-toggle.btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: rgba(175, 47, 47, 0.2);
+}
+
+.btn-default-others:active,
+.btn-default-others.active,
+
+{
+  border:1px solid transparent;
+}
+
+.btn-default-others:focus,
+.delete-button:focus,
+.done-button:focus {
+  outline:0;
+}
