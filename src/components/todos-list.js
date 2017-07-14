@@ -18,11 +18,16 @@ export default class TodosList extends React.Component {
 
 	render() {
 		return (
-			<table className="list-group">
-				<tbody>
+			<section className="main">
+				<input 
+                    className="toggle-all"
+                    type="checkbox"
+             	/>
+				<ul className="todo-list">
 					{this.renderItems()}
-				</tbody>
-			</table>
+				</ul>
+			
+			</section>
 		);
 	}
 }

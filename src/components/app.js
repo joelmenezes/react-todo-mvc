@@ -218,10 +218,11 @@ export default class App extends React.Component {
     render() {
 		return (
 			<section className="todoapp">
-                <header>
-				<h1>todos</h1>
-				<CreateTodo todos={this.state.todos} createTask={this.createTask.bind(this)}/>
-				</header>
+                <CreateTodo 
+                    todos={this.state.todos} 
+                    createTask={this.createTask.bind(this)}
+                />
+    			
                 <TodosList 
 					todos={this.setTodos()} 
 					toggleTask={this.toggleTask.bind(this)}

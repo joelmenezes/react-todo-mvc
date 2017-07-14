@@ -43,11 +43,18 @@ export default class TodosListItem extends React.Component {
 		}
 
 		return(
-			<td 
-				style={taskStyle}
-				onDoubleClick={this.onEditClick.bind(this)}>
-				{task}
-			</td>
+			
+				<div className="view">
+					<input
+						className="toggle"
+						type="checkbox"
+					/>
+					<label
+						onDoubleClick={this.onEditClick.bind(this)}>
+						{task}
+					</label>
+				</div>
+			
 		);
 	}
 
@@ -55,6 +62,7 @@ export default class TodosListItem extends React.Component {
 		Renders the 'Cancel' button if a task is being edited. 
 		Renders 'Done' and 'Delete' buttons when cursor is over a task.
 	*/
+	
 	renderActionsSection() {
 		if (this.state.isEditing){
 			return(
@@ -85,6 +93,7 @@ export default class TodosListItem extends React.Component {
 		);
 	}
 	
+	
 	onEditClick() {
 		this.setState({ isEditing: true });
 	}
@@ -108,10 +117,10 @@ export default class TodosListItem extends React.Component {
 
 	render() {
 		return (
-			<tr>
+			<li>
 				{this.renderTaskSection()}
-				{this.renderActionsSection()}
-			</tr>
+				
+			</li>
 		);
 	}
 }
