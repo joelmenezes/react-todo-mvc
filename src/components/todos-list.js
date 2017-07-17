@@ -16,13 +16,21 @@ export default class TodosList extends React.Component {
 			{...todo} {...props} />);
 	}
 
-	render() {
-		return (
-			<section className="main">
+	renderToggleAll() {
+		if (this.props.todos.length > 0) {
+			return (
 				<input 
                     className="toggle-all"
                     type="checkbox"
+                    onChange={this.props.toggleAll}
              	/>
+			);
+		}
+	}
+	render() {
+		return (
+			<section className="main">
+				{this.renderToggleAll()}
 				<ul className="todo-list">
 					{this.renderItems()}
 				</ul>
