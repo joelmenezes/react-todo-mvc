@@ -520,9 +520,9 @@ html .clear-completed:active {
 }
 
 .btn {
-    display: inline-block;
-    padding: 6px 12px;
-    margin: 2px;
+    display: inline;
+    padding: 3px 7px;
+    margin: -1px 3px -1px 3px;
     font-size: 12px;
     font-weight: normal;
     line-height: 1.42857143;
@@ -538,28 +538,30 @@ html .clear-completed:active {
     user-select: none;
     background-image: none;
     border: 1px solid transparent;
-    color: #333;
+    color: #777;
+    outline:0;
     background-color: #fff;
-    border-color: #ccc;  
+      
 }
 
 .btn:hover,
 .btn:focus,
 .btn.focus {
-  color: #333;
+  color: #777;
   text-decoration: none;
 }
 
 .btn-default {
-  color: #333;
+  color: #777;
   background-color: #fff;
   border-color: #ccc;
+  border: 1px solid transparent;
 }
 
 .btn-default:active,
 .btn-default:focus,
 .open > .dropdown-toggle.btn-default {
-  color: #333;
+  color: #777;
   background-color: #fff;
   border-color: rgba(175, 47, 47, 0.2);
 }
