@@ -73,6 +73,21 @@ export default class App extends React.Component {
         });
     }
 
+    /*
+        Receives a task (String) from 'TodosListItem', and removes it from the 'todos' array.
+    */
+    deleteTask(uuid) {
+        let newTodos = this.state.todos.filter(todo => todo.uuid !== uuid);
+        this.setState({ 
+            todos: newTodos,
+            toggleStatus : false,
+            countActive: this.countActive(),
+            countCompleted: this.countCompleted() 
+        });
+    }
+
+    
+    /*
     completed(task) {
         let foundTodo = this.state.todos.find(todo => todo.task === task);
         foundTodo.isCompleted = true;
@@ -83,13 +98,14 @@ export default class App extends React.Component {
             countCompleted: this.countCompleted()
         });
     }
+    */
 
     /*
 		Receives 2 tasks (String) from 'TodosListItem', searches for the 'oldTask' from the
 		'todos' array and replaces it with the 'newTask'.
     */
-    saveTask(oldTask, newTask) {
-    	const foundTodo = this.state.todos.find(todo => todo.task === oldTask);
+    saveTask(oldUUID, newTask) {
+    	const foundTodo = this.state.todos.find(todo => todo.uuid === oldUUID);
     	foundTodo.task = newTask;
     	this.setState({ 
     		todos: this.state.todos,
@@ -99,18 +115,7 @@ export default class App extends React.Component {
     	});
     }
 
-    /*
-		Receives a task (String) from 'TodosListItem', and removes it from the 'todos' array.
-    */
-    deleteTask(uuid) {
-        let newTodos = this.state.todos.filter(todo => todo.uuid !== uuid);
-    	this.setState({ 
-    		todos: newTodos,
-    		toggleStatus : false,
-    		countActive: this.countActive(),
-            countCompleted: this.countCompleted() 
-    	});
-    }
+    
 
     /*
 		This method is called from 'Views' when the 'Active' button is clicked. It filters all
@@ -263,7 +268,6 @@ export default class App extends React.Component {
 					toggleTask={this.toggleTask.bind(this)}
 					saveTask={this.saveTask.bind(this)}
 					deleteTask={this.deleteTask.bind(this)}
-                    completed={this.completed.bind(this)}
 				/>
                 {this.renderViews()}
 				
