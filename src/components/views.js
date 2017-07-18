@@ -13,7 +13,6 @@ export default class Views extends React.Component {
 
 	clearCompleted() {
 		if (this.props.countCompleted > 0){
-			console.log("greater than 1");
 			return (
 				<button
 					onClick={this.props.clearCompleted.bind(this)}
@@ -26,7 +25,6 @@ export default class Views extends React.Component {
 
 	render() {
 		var activeWord = this.pluralize(this.props.countActive, 'item');
-		console.log("working");
 		return (
 			<footer className="footer">
 				<span className="todo-count">

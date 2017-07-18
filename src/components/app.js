@@ -1,12 +1,11 @@
 import React from 'react';
+import _ from 'lodash'
 
 import TodosList from './todos-list'
 import CreateTodo from './create-todo'
 import Views from './views'
 
 const todos = [];
-const activeTodos = [];
-const completeTodos = [];
 const viewType = 'all';
 const toggleStatus = false;
 const countActive = 0;
@@ -18,8 +17,6 @@ export default class App extends React.Component {
 
 		this.state = {
 			todos, 
-			activeTodos, 
-			completeTodos,
 			viewType, 
 			toggleStatus, 
 			countActive,
@@ -27,14 +24,32 @@ export default class App extends React.Component {
 		}; 
 	}
 
-	/*
-		Receives a task (String) from 'CreateTodo' and adds it to the array 'todos'.
-	*/
+    createUUID() {
+        var i, random;
+            var uuid = '';
+
+            for (i = 0; i < 32; i++) {
+                random = Math.random() * 16 | 0;
+                if (i === 8 || i === 12 || i === 16 || i === 20) {
+                    uuid += '-';
+                }
+                uuid += (i === 12 ? 4 : (i === 16 ? (random & 3 | 8) : random))
+                    .toString(16);
+            }
+
+        return uuid;
+    }
+
+	//Receives a task (String) from 'CreateTodo' and adds it to the array 'todos'.
+	
 	createTask(task) {
+        var uuid = this.createUUID();
 		this.state.todos.push({
 			task,
-			isCompleted: false
+			isCompleted: false,
+            uuid: uuid
 		});
+
 		this.setState({ 
 			viewType:'all',
         	toggleStatus : false,
@@ -47,13 +62,24 @@ export default class App extends React.Component {
 		Receives a task (String) from 'TodosListItem', searches for it in the todos array,
 		and toggles its 'isCompleted' value.
 	*/
-	toggleTask(task) {
-        let foundTodo = this.state.todos.find(todo => todo.task === task);
+	toggleTask(uuid) {
+        let foundTodo = this.state.todos.find(todo => todo.uuid === uuid);
         foundTodo.isCompleted = !foundTodo.isCompleted;
         this.setState({ 
         	todos: this.state.todos,
         	toggleStatus : false,
         	countActive: this.countActive(),
+            countCompleted: this.countCompleted()
+        });
+    }
+
+    completed(task) {
+        let foundTodo = this.state.todos.find(todo => todo.task === task);
+        foundTodo.isCompleted = true;
+        this.setState({ 
+            todos: this.state.todos,
+            toggleStatus : false,
+            countActive: this.countActive(),
             countCompleted: this.countCompleted()
         });
     }
@@ -76,11 +102,10 @@ export default class App extends React.Component {
     /*
 		Receives a task (String) from 'TodosListItem', and removes it from the 'todos' array.
     */
-    deleteTask(taskToDelete) {
-        var index = this.state.todosdo.indexOf(taskToDelete);
-    	this.state.todos.splice(index, 1);
+    deleteTask(uuid) {
+        let newTodos = this.state.todos.filter(todo => todo.uuid !== uuid);
     	this.setState({ 
-    		todos: this.state.todos,
+    		todos: newTodos,
     		toggleStatus : false,
     		countActive: this.countActive(),
             countCompleted: this.countCompleted() 
@@ -95,7 +120,6 @@ export default class App extends React.Component {
     activeTasks() {
     	const activeTasks = this.state.todos.filter(todo=> todo.isCompleted === false);
     	this.setState({
-    		activeTodos: activeTasks,
     		viewType: 'active'
     	});
     }
@@ -129,12 +153,12 @@ export default class App extends React.Component {
 		iterates through the 'todos' array and removes completed tasks.
     */
     clearCompleted() {
-        var todoNow = this.state.todos;
-        for (var j = 0; j < todoNow.length; j++) {
-            if (todoNow[j].isCompleted === true) {
-                todoNow.splice(j, 1);
-            }
-        }
+        var todoNow = this.state.todos.filter(function(todo) {
+                if (todo.isCompleted === false){
+                    return todo;
+                }
+            });
+        
         this.setState({
     		viewType: 'all',
             todos: todoNow,
@@ -182,6 +206,16 @@ export default class App extends React.Component {
         return countCompleted;
     }
 
+    returnActiveTodos() {
+        const activeTasks = _.filter(this.state.todos, todo=> todo.isCompleted === false);
+        return activeTasks;    
+    }
+
+    returnCompletedTodos() {
+        const completeTasks = _.filter(this.state.todos, todo=> todo.isCompleted === true);
+        return completeTasks;    
+    }
+
     /*
 		This method decides which array of todos is to be passed to TodosList. It does so by
 		switching 'this.state.viewType' and returning the relevant array.
@@ -191,9 +225,9 @@ export default class App extends React.Component {
     		case 'all':
     			return this.state.todos;
     		case 'active':
-    			return this.state.activeTodos;
+    			this.returnActiveTodos();
     		case 'completed':
-    			return this.state.completeTodos;
+    			this.returnCompletedTodos();
     		default: 
     			return this.state.todos;
     	}
@@ -224,10 +258,12 @@ export default class App extends React.Component {
                 />
     			
                 <TodosList 
+                    toggleAll={this.toggleAll.bind(this)}
 					todos={this.setTodos()} 
 					toggleTask={this.toggleTask.bind(this)}
 					saveTask={this.saveTask.bind(this)}
 					deleteTask={this.deleteTask.bind(this)}
+                    completed={this.completed.bind(this)}
 				/>
                 {this.renderViews()}
 				

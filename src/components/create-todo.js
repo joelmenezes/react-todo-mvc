@@ -34,12 +34,6 @@ export default class CreateTodo extends React.Component {
   	*/
   	handleCreate(val) {
 		const task = this.state.inputv;
-		const validateInput = this.validateInput(task);
-
-		if(validateInput) {
-	  		this.setState({ error: validateInput });
-	  		return;
-		}
 
 		this.setState({ error: null });
 		this.props.createTask(val);
@@ -50,22 +44,10 @@ export default class CreateTodo extends React.Component {
   		if (event.keyCode !== ENTER_KEY) {
   			return;
   		}
-  		console.log(this.state.inputv);
-  		var val = this.state.inputv;
+  		var val = this.state.inputv.trim();
   		if(val){
   			this.handleCreate(val);
   		}
-  	}
-
-  	//Returns an error if task is empty or repeated. 
-  	validateInput(task) {
-		if (!task) {
-	  		return 'Please enter a task';
-		} else if (_.find(this.props.todos, todo => todo.task === task )) {
-	  	  	return 'Task already exists';
-		} else {
-	  		return null;
-		}
   	}
 
   	render() {
