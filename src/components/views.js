@@ -1,8 +1,3 @@
-/*
-	Contains 3 buttons to view tasks: Active, Completed and All.
-	A 'Clear Completed' button clears all the tasks that have been marked completed.
-	The 
-*/
 import React from 'react';
 import Utils from './utils';
 

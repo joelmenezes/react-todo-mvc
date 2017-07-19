@@ -7,43 +7,29 @@ export default class CreateTodo extends React.Component {
 		super(props);
 
 		this.state = { 
-  	  		inputv : '',
-	  		error: null
+  	  		input : ''
 		};
 	
 		this.handleChange = this.handleChange.bind(this);
 		this.handleNewTodoKeyDown = this.handleNewTodoKeyDown.bind(this);
 	}
 
-	//This updates the state when the value in the input box is changed.
-  	handleChange(event){
-		this.setState({ inputv: event.target.value });
+	handleChange(event){
+		this.setState({ input: event.target.value });
   	}
 
-  	//Returns an error when an empty or repeated task is entered.
-  	renderError() {
-		if (!this.state.error) { return null; }
-
-		return <div style={{ color: 'red' }}>{this.state.error}</div>;
-  	}
-
-  	/*
-		Checks to see if the input is valid. If it is, it calls 'createTask'
-		from 'App' and passes the input value.
-  	*/
   	handleCreate(val) {
-		const task = this.state.inputv;
+		const task = this.state.input;
 
-		this.setState({ error: null });
 		this.props.createTask(val);
-		this.setState ({ inputv : ''});
+		this.setState ({ input : ''});
   	}
 
   	handleNewTodoKeyDown(event) {
   		if (event.keyCode !== ENTER_KEY) {
   			return;
   		}
-  		var val = this.state.inputv.trim();
+  		var val = this.state.input.trim();
   		if(val){
   			this.handleCreate(val);
   		}
@@ -57,7 +43,7 @@ export default class CreateTodo extends React.Component {
 					<input
 						className="new-todo"
 						placeholder="What needs to be done?" 
-						value={this.state.inputv} 
+						value={this.state.input} 
 						onKeyDown={this.handleNewTodoKeyDown}
 						onChange={this.handleChange}
 						autoFocus={true}

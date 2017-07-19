@@ -24,6 +24,7 @@ export default class App extends React.Component {
 		};
 	}
 
+    //Creates a random UUID
     createUUID() {
         var i, random;
             var uuid = '';
@@ -57,10 +58,7 @@ export default class App extends React.Component {
         });
 	}
 
-	/*
-		Receives a task (String) from 'TodosListItem', searches for it in the todos array,
-		and toggles its 'isCompleted' value.
-	*/
+	//Toggles a task using its UUID
 	toggleTask(uuid) {
         let foundTodo = this.state.todos.find(todo => todo.uuid === uuid);
         foundTodo.isCompleted = !foundTodo.isCompleted;
@@ -73,7 +71,7 @@ export default class App extends React.Component {
     }
 
     
-    //Receives a task (String) from 'TodosListItem', and removes it from the 'todos' array.
+    //Receives uuid from 'TodosListItem', and removes it from the 'todos' array.
     deleteTask(uuid) {
         let newTodos = this.state.todos.filter(todo => todo.uuid !== uuid);
         this.setState({ 
@@ -85,10 +83,7 @@ export default class App extends React.Component {
     }
 
     
-    /*
-		Receives 2 tasks (String) from 'TodosListItem', searches for the 'oldTask' from the
-		'todos' array and replaces it with the 'newTask'.
-    */
+    //Receives uuid and new task. Searches for uuid and replaces the old task with the 'newTask'.
     saveTask(oldUUID, newTask) {
     	const foundTodo = this.state.todos.find(todo => todo.uuid === oldUUID);
     	foundTodo.task = newTask;
@@ -100,21 +95,18 @@ export default class App extends React.Component {
     	});
     }    
 
-    /*
-		This method is called from 'Views' when the 'Completed' button is clicked. It filters all
-		the completed tasks from the 'todos' array. It then updates the value of 'completedTodos' in
-		the state.
-    */
+    activeTasks(){
+        this.setState({
+            viewType: 'active'
+        })
+    }
+
     completedTasks() {    	
     	this.setState({
     		viewType: 'completed'
     	});
     }
-
-    /*
-		This method is called from 'Views' when the 'All' button is clicked. It then updates the 
-		the state.
-    */
+  
     allTasks() {
     	this.setState({ 
     		todos: this.state.todos,
@@ -122,10 +114,7 @@ export default class App extends React.Component {
     	});
     }
 
-    /*
-		This method is called from 'Views' when the 'Clear Completed' button is clicked. It 
-		iterates through the 'todos' array and removes completed tasks.
-    */
+    //Filters out completed tasks and stores new array in 'todos'
     clearCompleted() {
         var todoNow = this.state.todos.filter(function(todo) {
                 if (todo.isCompleted === false){
@@ -141,11 +130,7 @@ export default class App extends React.Component {
     	});
     }
 
-    /*
-    	This method is called from 'Views' when the 'Toggle All' button is clicked.
-		It uses 'this.state.toggleStatus' to decide if the todos list was modified 
-		after the previous click of 'Toggle All'
-    */
+    //Toggles isCompleted property of all todos
     toggleAll() {
     	if (!this.state.toggleStatus) {
     		this.state.todos.map(function (todo) {
@@ -167,10 +152,7 @@ export default class App extends React.Component {
     	}
     }
 
-    /*
-		This method is called whenever there are any changes in the todos array to count the 
-		number of active tasks.
-    */
+    //Counts active and completed tasks
     countActive() {
     	const activeTasks = this.state.todos.filter(todo=> todo.isCompleted === false);
     	return activeTasks.length;
@@ -179,17 +161,6 @@ export default class App extends React.Component {
     countCompleted() {
         const countCompleted = this.state.todos.length - this.countActive();
         return countCompleted;
-    }
-
-    /*
-		This method decides which array of todos is to be passed to TodosList. It does so by
-		switching 'this.state.viewType' and returning the relevant array.
-    */
-
-    activeTasks(){
-        this.setState({
-            viewType: 'active'
-        })
     }
 
     renderViews() {
@@ -225,7 +196,6 @@ export default class App extends React.Component {
                     viewType={this.state.viewType}
 				/>
                 {this.renderViews()}
-				
 			</section>
 		);
 	}
