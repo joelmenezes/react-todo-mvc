@@ -35,10 +35,10 @@ export default class TodosListItem extends React.Component {
 		Saves the old and new tasks and calles 'saveTask' from 'App'
 	*/
 	onSaveClick(event) {
-		const oldTask = this.props.task;
+		const oldUUID = this.props.uuid;
 		const newTask = this.state.input;
 
-		this.props.saveTask(oldTask, newTask);
+		this.props.saveTask(oldUUID, newTask);
 		this.setState({	isEditing: false });
 	}
 
@@ -46,7 +46,6 @@ export default class TodosListItem extends React.Component {
 		const {task, isCompleted, uuid} = this.props;
 		
 		if(this.state.isEditing){
-			console.log("Editing");
 			return(
 				<input 
 					className="edit"

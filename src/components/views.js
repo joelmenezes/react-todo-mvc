@@ -7,6 +7,7 @@ import React from 'react';
 import Utils from './utils';
 
 export default class Views extends React.Component {
+	
 	pluralize(count, word) {
 		return count === 1 ? word : word + 's';
 	}
