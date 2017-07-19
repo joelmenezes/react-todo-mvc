@@ -4,15 +4,11 @@ A simple To-Do application that utilizes the React framework to create a beautif
 
 ## Setup
 
-Clone the repository using the following command.
-
-```
-git clone --recursive git@gitlab.com:joelmenezes/React-ToDo-MVC.git
-```
+Download the compressed repository and extract it. Navigate to the directory using the terminal.
 
 ## Running
 
-Run the following command to install all the dependencies. Ensure that you have [node](https://nodejs.org/en/) installed.
+Ensure that you have [node](https://nodejs.org/en/) installed before proceeding.
 
 Run the following command to install the dependencies required:
 ```
@@ -26,10 +22,12 @@ npm install -g webpack webpack-dev-server
 
 ```
 
-Run the following command to run the web-app in your [localhost](http://127.0.0.1:8080/).
+Run the following command to run the web-app. 
 ```
 webpack-dev-server
 ```
+
+Once ```webpack-dev-server``` has compiled, navigate to your [localhost](http://127.0.0.1:8080/).
 
 ### Documentation
 

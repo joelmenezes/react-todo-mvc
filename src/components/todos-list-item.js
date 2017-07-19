@@ -34,9 +34,7 @@ export default class TodosListItem extends React.Component {
 		}
 	}
 
-	/*
-		Saves the old and new tasks and calles 'saveTask' from 'App'
-	*/
+	//Gets uuid of old task and calls 'saveTask' from 'App'
 	onSaveClick(event) {
 		const oldUUID = this.props.uuid;
 		const newTask = this.state.input;
@@ -52,6 +50,7 @@ export default class TodosListItem extends React.Component {
 		if(isCompleted){
 			labelStyle = 'label-completed';
 		}
+
 		if(this.state.isEditing){
 			return(
 				<input 
@@ -85,7 +84,6 @@ export default class TodosListItem extends React.Component {
 						onClick={this.props.deleteTask.bind(this, this.props.uuid)}
 					/>
 				</div>
-			
 		);
 	}
 

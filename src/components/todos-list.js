@@ -11,10 +11,7 @@ export default class TodosList extends React.Component {
 		}
 	}
 
-	/*
-		Separates props and 'todos' from the props it received from 'App'.
-		Iterates through the props and renders tasks in 'TodoListItem'
-	*/
+	//Updates state if viewType changes
 	componentWillReceiveProps(nextProps){
 		if (this.props.viewType !== nextProps.viewType){
 			this.setState({
@@ -26,8 +23,8 @@ export default class TodosList extends React.Component {
 
 	renderItems(){
 		const props = this.props;
-
 		var todosToRender = this.props.todos;
+		
 		switch (this.state.viewType){
     		case 'all':
     			todosToRender = this.props.todos;
@@ -59,6 +56,7 @@ export default class TodosList extends React.Component {
 			);
 		}
 	}
+	
 	render() {
 		return (
 			<section className="main">
