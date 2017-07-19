@@ -1,12 +1,10 @@
 # React To-Do app
 
-A simple To-Do application that utilizes the React framework to create a beautiful To-Do web app.
-
-## Setup
-
-Download the compressed repository and extract it. Navigate to the directory using the terminal.
+A simple web application that utilizes the React framework to create a beautiful To-Do app.
 
 ## Running
+
+Download the compressed repository and extract it. Navigate to the directory using the terminal.
 
 Ensure that you have [node](https://nodejs.org/en/) installed before proceeding.
 
