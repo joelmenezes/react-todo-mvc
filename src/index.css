@@ -578,3 +578,8 @@ html .clear-completed:active {
 .done-button:focus {
   outline:0;
 }
+
+.label-completed {
+  color: #d9d9d9;
+  text-decoration: line-through;
+}

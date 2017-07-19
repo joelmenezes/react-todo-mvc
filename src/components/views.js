@@ -7,13 +7,27 @@ import React from 'react';
 import Utils from './utils';
 
 export default class Views extends React.Component {
-	
+	constructor(props) {
+		super(props);
+		this.state = {
+			countCompleted: 0
+		}
+	}
+
+	componentWillReceiveProps(nextProps){
+		if (this.props.countCompleted !== nextProps.countCompleted){
+			this.setState({
+			countCompleted: nextProps.countCompleted
+		});
+		}
+	}
+
 	pluralize(count, word) {
 		return count === 1 ? word : word + 's';
 	}
 
 	clearCompleted() {
-		if (this.props.countCompleted > 0){
+		if (this.state.countCompleted > 0){
 			return (
 				<button
 					onClick={this.props.clearCompleted.bind(this)}

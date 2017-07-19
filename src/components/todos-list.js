@@ -21,8 +21,6 @@ export default class TodosList extends React.Component {
 			viewType: nextProps.viewType
 		});
 		}
-		
-		console.log(this.state.viewType);
 	}
 
 
@@ -42,7 +40,6 @@ export default class TodosList extends React.Component {
     			break;
     	}
 
-    	console.log(todosToRender);
 		return todosToRender.map((todo, index) => 
 			<TodosListItem 
 				key={index}
