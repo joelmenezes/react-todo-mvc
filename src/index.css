@@ -511,7 +511,7 @@ html .clear-completed:active {
 @media (min-width: 899px) {
   .learn-bar {
     width: auto;
-    padding-left: 300px;
+    
   }
 
   .learn-bar > .learn {
@@ -577,4 +577,9 @@ html .clear-completed:active {
 .delete-button:focus,
 .done-button:focus {
   outline:0;
+}
+
+.label-completed {
+  color: #d9d9d9;
+  text-decoration: line-through;
 }

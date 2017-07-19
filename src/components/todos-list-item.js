@@ -19,8 +19,11 @@ export default class TodosListItem extends React.Component {
     	this.setState( {input: event.target.value });
   	}		
 	
-	onEditClick() {
-		this.setState({ isEditing: true });
+	onEditClick(task) {
+		this.setState({ 
+			isEditing: true,
+			input: task
+		});
 	}
 
 	handleKeyDown(event) {
@@ -44,15 +47,20 @@ export default class TodosListItem extends React.Component {
 
 	renderTaskSection() {
 		const {task, isCompleted, uuid} = this.props;
-		
+		var labelStyle;
+
+		if(isCompleted){
+			labelStyle = 'label-completed';
+		}
 		if(this.state.isEditing){
 			return(
 				<input 
 					className="edit"
 					type="text" 
-					placeholder={task}
-					
-        			onChange={this.handleChange}
+					autoFocus="autoFocus"
+					onBlur={this.onSaveClick.bind(this)}
+					value={this.state.input}
+					onChange={this.handleChange}
         			onKeyDown={this.handleKeyDown}
 				/>
 			);
@@ -68,7 +76,8 @@ export default class TodosListItem extends React.Component {
 						checked={isCompleted}
 					/>
 					<label
-						onDoubleClick={this.onEditClick.bind(this)}>
+						className={labelStyle}
+						onDoubleClick={this.onEditClick.bind(this, task)}>
 						{task}
 					</label>
 					<button

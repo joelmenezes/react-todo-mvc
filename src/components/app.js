@@ -136,7 +136,8 @@ export default class App extends React.Component {
         this.setState({
     		viewType: 'all',
             todos: todoNow,
-    		countActive: this.countActive()
+    		countActive: this.countActive(),
+            countCompleted: this.countCompleted()
     	});
     }
 
