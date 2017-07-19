@@ -237,11 +237,11 @@ label[for='toggle-all'] {
 .todo-list li:hover .destroy {
   display: block;
 }
-
+/* DO SOMETHING OF this 
 .todo-list li .edit {
   display: none;
 }
-
+*/
 .todo-list li.editing:last-child {
   margin-bottom: -1px;
 }
@@ -517,4 +517,64 @@ html .clear-completed:active {
   .learn-bar > .learn {
     left: 8px;
   }
+}
+
+.btn {
+    display: inline;
+    padding: 3px 7px;
+    margin: -1px 3px -1px 3px;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    color: #777;
+    outline:0;
+    background-color: #fff;
+      
+}
+
+.btn:hover,
+.btn:focus,
+.btn.focus {
+  color: #777;
+  text-decoration: none;
+}
+
+.btn-default {
+  color: #777;
+  background-color: #fff;
+  border-color: #ccc;
+  border: 1px solid transparent;
+}
+
+.btn-default:active,
+.btn-default:focus,
+.open > .dropdown-toggle.btn-default {
+  color: #777;
+  background-color: #fff;
+  border-color: rgba(175, 47, 47, 0.2);
+}
+
+.btn-default-others:active,
+.btn-default-others.active,
+
+{
+  border:1px solid transparent;
+}
+
+.btn-default-others:focus,
+.delete-button:focus,
+.done-button:focus {
+  outline:0;
 }

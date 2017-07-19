@@ -4,47 +4,59 @@
 	The 
 */
 import React from 'react';
+import Utils from './utils';
 
 export default class Views extends React.Component {
 	
+	pluralize(count, word) {
+		return count === 1 ? word : word + 's';
+	}
+
+	clearCompleted() {
+		if (this.props.countCompleted > 0){
+			return (
+				<button
+					onClick={this.props.clearCompleted.bind(this)}
+					className="btn btn-default-others">
+					Clear Completed
+				</button>
+			);
+		}
+	}
+
 	render() {
+		var activeWord = this.pluralize(this.props.countActive, 'item');
 		return (
-			<ul className="list-group">
-				<li className="list-group-item">
-					<button
-						onClick={this.props.activeTasks.bind(this)}
-						className="btn btn-default">
-						Active
-					</button>
-					
-					<button
-						onClick={this.props.completedTasks.bind(this)}
-						className="btn btn-default">
-						Completed
-					</button>
+			<footer className="footer">
+				<span className="todo-count">
+					<strong>{this.props.countActive}</strong> {activeWord} left
+				</span>
 
-					<button
-						onClick={this.props.allTasks.bind(this)}
-						className="btn btn-default">
-						All
-					</button>
-				</li>
-				<li className="list-group-item">	
-					<button
-						onClick={this.props.clearCompleted.bind(this)}
-						className="btn btn-default-others">
-						Clear Completed
-					</button>
-					
-					<button
-						onClick={this.props.toggleAll.bind(this)}
-						className="btn btn-default-others">
-						Toggle All
-					</button>
+				<ul className="filters">
+					<li className="list-group-item">
+						<button
+							onClick={this.props.activeTasks.bind(this)}
+							className="btn btn-default">
+							Active
+						</button>
+						
+						<button
+							onClick={this.props.completedTasks.bind(this)}
+							className="btn btn-default">
+							Completed
+						</button>
 
-					<p>{this.props.countActive} tasks to be completed</p>
-				</li>
-			</ul>
+						<button
+							onClick={this.props.allTasks.bind(this)}
+							className="btn btn-default">
+							All
+						</button>
+					</li>
+					<li>
+						{this.clearCompleted()}
+					</li>
+				</ul>
+			</footer>	
 		);
 	}
 }

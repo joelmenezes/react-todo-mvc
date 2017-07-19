@@ -1,11 +1,14 @@
-var app = app || {};
-
+export class Utils {
+	pluralize(count, word) {
+		return count === 1 ? word : word + 's';
+	}
+}
+/*
 (function () {
 	'use strict';
 
 	app.Utils = {
 		uuid: function () {
-			/*jshint bitwise:false */
 			var i, random;
 			var uuid = '';
 
@@ -21,9 +24,7 @@ var app = app || {};
 			return uuid;
 		},
 
-		pluralize: function (count, word) {
-			return count === 1 ? word : word + 's';
-		},
+		,
 
 		store: function (namespace, data) {
 			if (data) {
@@ -48,3 +49,4 @@ var app = app || {};
 		}
 	};
 })();
+*/
