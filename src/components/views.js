@@ -14,21 +14,22 @@ export default class Views extends React.Component {
 		}
 	}
 
-	componentWillReceiveProps(nextProps){
-		if (this.props.countCompleted !== nextProps.countCompleted){
-			this.setState({
-			countCompleted: nextProps.countCompleted
+	componentDidMount(){
+		this.setState({
+			countCompleted: this.props.countCompleted
 		});
-		}
 	}
 
 	pluralize(count, word) {
 		return count === 1 ? word : word + 's';
 	}
 
-	clearCompleted() {
-		if (this.state.countCompleted > 0){
-			return (
+	render() {
+		var activeWord = this.pluralize(this.props.countActive, 'item');
+		var clearCompletedButton = null;
+		
+		if (this.props.countCompleted > 0){
+			clearCompletedButton = (
 				<button
 					onClick={this.props.clearCompleted.bind(this)}
 					className="btn btn-default-others">
@@ -36,10 +37,7 @@ export default class Views extends React.Component {
 				</button>
 			);
 		}
-	}
 
-	render() {
-		var activeWord = this.pluralize(this.props.countActive, 'item');
 		return (
 			<footer className="footer">
 				<span className="todo-count">
@@ -48,6 +46,11 @@ export default class Views extends React.Component {
 
 				<ul className="filters">
 					<li className="list-group-item">
+						<button
+							onClick={this.props.allTasks.bind(this)}
+							className="btn btn-default">
+							All
+						</button>
 						<button
 							onClick={this.props.activeTasks.bind(this)}
 							className="btn btn-default">
@@ -59,15 +62,10 @@ export default class Views extends React.Component {
 							className="btn btn-default">
 							Completed
 						</button>
-
-						<button
-							onClick={this.props.allTasks.bind(this)}
-							className="btn btn-default">
-							All
-						</button>
 					</li>
+					
 					<li>
-						{this.clearCompleted()}
+						{clearCompletedButton}
 					</li>
 				</ul>
 			</footer>	
