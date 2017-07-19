@@ -12,9 +12,24 @@ git clone --recursive git@gitlab.com:joelmenezes/React-ToDo-MVC.git
 
 ## Running
 
-The app is built with [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) and compiled at runtime for a lighter and more fun code reading experience. As stated in the link, JSX is not mandatory.
+Run the following command to install all the dependencies. Ensure that you have [node](https://nodejs.org/en/) installed.
 
-To run the app, spin up an HTTP server (e.g. `python -m SimpleHTTPServer`) and visit http://localhost/.../myexample/.
+Run the following command to install the dependencies required:
+```
+npm install 
+
+```
+
+Ensure that ```webpack``` and ```webpack-dev-server``` are installed globally by using the command:
+```
+npm install -g webpack webpack-dev-server 
+
+```
+
+Run the following command to run the web-app in your [localhost](http://127.0.0.1:8080/).
+```
+webpack-dev-server
+```
 
 ### Documentation
 
