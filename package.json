@@ -9,7 +9,9 @@
   },
   "scripts": {
     "postdeploy": "webpack-dev-server",
-    "start": "babel-node server.js"
+    "start": "babel-node server.js",
+    "build": "webpack -p --progress",
+    "start": "webpack-dev-server"
   },
   "devDependencies": {
     "babel-preset-es2015-webpack": "^6.4.3",
