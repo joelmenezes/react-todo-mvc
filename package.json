@@ -8,6 +8,7 @@
     "react-scripts": "1.0.10"
   },
   "scripts": {
+    "postdeploy": "webpack-dev-server"
     "start": "babel-node server.js"
   },
   "devDependencies": {
