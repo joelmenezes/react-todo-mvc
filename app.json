@@ -8,7 +8,7 @@
     "react-scripts": "1.0.10"
   },
   "scripts": {
-      "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress",
+    "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress",
     "postdeploy": "webpack-dev-server",
     "start": "babel-node server.js"
   },
