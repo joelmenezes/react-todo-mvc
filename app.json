@@ -8,9 +8,9 @@
     "react-scripts": "1.0.10"
   },
   "scripts": {
+    "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress",
     "postdeploy": "webpack-dev-server",
-    "build": "webpack -p --progress",
-    "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js"
+    "start": "babel-node server.js"
   },
   "devDependencies": {
     "babel-preset-es2015-webpack": "^6.4.3",

@@ -24,7 +24,7 @@ export default class App extends React.Component {
 		};
 	}
 
-    //Creates a random UUID
+    //Creates random UUID
     createUUID() {
         var i, random;
             var uuid = '';
