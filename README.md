@@ -27,6 +27,9 @@ webpack-dev-server
 
 Once ```webpack-dev-server``` has compiled, navigate to your [localhost](http://127.0.0.1:8080/).
 
+### Demo
+
+A demo of this application can be found [here](https://react-todo-mvc.herokuapp.com/).
 ### Documentation
 
 The [React getting started documentation](http://facebook.github.io/react/docs/getting-started.html) is a great way to get started.
